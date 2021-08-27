@@ -3,6 +3,7 @@
     <Header :counter="list.length" />
     <List @editItem="edit" @removeItem="remove" :list="list" />
     <Add :addData="addData" @addDataToList="addDataFunction" />
+    <Popup :showPopup="popupShow" />
   </div>
 </template>
 
@@ -10,6 +11,7 @@
 import Header from "./components/Header.vue";
 import List from "./components/List.vue";
 import Add from "./components/Add.vue";
+import Popup from "./components/Popup.vue";
 export default {
   data() {
     return {
@@ -20,12 +22,14 @@ export default {
       list: [{ name: "Momen", time: "12:12" }],
       isEditing: false,
       editItemName: "",
+      popupShow: true,
     };
   },
   components: {
     Header,
     List,
     Add,
+    Popup,
   },
   methods: {
     addDataFunction(data) {
