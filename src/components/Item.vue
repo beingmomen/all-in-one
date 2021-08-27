@@ -20,9 +20,7 @@
 <script>
 export default {
   data() {
-    return {
-      // removeItem: false,
-    };
+    return {};
   },
   props: ["list"],
   methods: {
@@ -34,10 +32,8 @@ export default {
     },
     edit(name, time, i) {
       this.$emit("editItem", { name, time, i });
-      // console.log(name, time, i);
     },
   },
-  created() {},
 };
 </script>
 

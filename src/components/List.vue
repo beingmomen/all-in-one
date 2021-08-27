@@ -15,16 +15,11 @@ export default {
       this.$emit("removeItem", i);
     },
     edit(data) {
-      console.log(data);
       this.$emit("editItem", data);
-      // console.log(name, time, i);
     },
   },
   components: {
     Item,
-  },
-  created() {
-    // console.log(this.list);
   },
 };
 </script>

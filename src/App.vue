@@ -2,7 +2,7 @@
   <div id="toDo" class="to-do">
     <Header :counter="list.length" />
     <List @editItem="edit" @removeItem="remove" :list="list" />
-    <Add :addData="addData" :editlist="editList" @childToParent="child" />
+    <Add :addData="addData" @addDataToList="addDataFunction" />
   </div>
 </template>
 
@@ -17,8 +17,7 @@ export default {
         name: "",
         time: "",
       },
-      list: [{ name: "Momen", time: "" }],
-      editList: [],
+      list: [{ name: "Momen", time: "12:12" }],
       isEditing: false,
       editItemName: "",
     };
@@ -29,33 +28,26 @@ export default {
     Add,
   },
   methods: {
-    child(ev) {
-      if (ev.name !== "") {
+    addDataFunction(data) {
+      if (data.name !== "") {
         // is edit or add
         if (this.isEditing) {
           this.list.forEach((item) => {
             if (item.name == this.editItemName) {
-              item.name = ev.name;
+              item.name = data.name;
+              item.time = data.time;
             }
           });
         } else {
           // Add New Task
           let names = this.list.map((x) => x.name);
           console.log("names: ", names);
-          if (names.indexOf(ev.name) == -1) {
-            this.list.push({ name: ev.name, time: ev.time });
+          if (names.indexOf(data.name) == -1) {
+            this.list.push({ name: data.name, time: data.time });
           }
         }
         this.addData.name = "";
         this.isEditing = false;
-
-        // let isAdded = false;
-        // this.list.forEach((i) => {
-        //   if (i.name !== ev.name && !isAdded) {
-        //     this.list.push({ name: ev.name, time: ev.time });
-        //     isAdded = true;
-        //   }
-        // });
       }
     },
     remove(i) {
@@ -64,16 +56,10 @@ export default {
     edit(data) {
       this.isEditing = true;
       this.editItemName = data.name;
+      this.editItemTime = data.time;
       this.addData.name = data.name;
       this.addData.time = data.time;
     },
-  },
-  created() {
-    let [time] = this.list;
-    const date = new Date();
-    time.time = new Intl.DateTimeFormat("en-GB", {
-      timeStyle: "short",
-    }).format(date);
   },
 };
 </script>

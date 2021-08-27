@@ -9,13 +9,7 @@
 
 <script>
 export default {
-  data() {
-    return {};
-  },
   props: ["counter"],
-  created() {
-    // console.log(this.list);
-  },
 };
 </script>
 

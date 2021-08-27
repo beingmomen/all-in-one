@@ -16,8 +16,6 @@
         @keyup.enter="addNew"
         v-model="addData.time"
       />
-      <p class="text-light">NAme Is : {{ addData.name }}</p>
-      <!-- <i id="addTask" class="add-task fas fa-plus fa-2x"></i> -->
       <font-awesome-icon
         class="add-task"
         @click="addNew"
@@ -33,11 +31,10 @@ export default {
   data() {
     return {};
   },
-  props: ["editList", "addData"],
+  props: ["addData"],
   methods: {
     addNew() {
-      this.$emit("childToParent", this.addData);
-      // this.addData.name = "";
+      this.$emit("addDataToList", this.addData);
     },
   },
   computed: {},
@@ -46,9 +43,6 @@ export default {
     this.addData.time = new Intl.DateTimeFormat("en-GB", {
       timeStyle: "short",
     }).format(date);
-    // this.addData.name = this.editData.name
-    // this.addData.name = this.editData.name
-    // console.log(this.$props.editList);
   },
 };
 </script>
