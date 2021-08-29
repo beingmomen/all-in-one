@@ -1,85 +1,37 @@
 <template>
-  <div id="toDo" class="to-do">
-    <Header :counter="list.length" />
-    <List @editItem="edit" @removeItem="remove" :list="list" />
-    <Add :addData="addData" @addDataToList="addDataFunction" />
-    <Popup :showPopup="popupShow" />
+  <div class="navigation">
+    <div class="container">
+      <ul class="nav nav-pills justify-content-center">
+        <router-link class="nav-item" to="/" tag="li" active-class="active" exact> 
+          <a class="nav-link" aria-current="page" href="#" >Home</a>
+        </router-link>
+        <router-link class="nav-item" to="/todo" tag="li" active-class="active">
+          <a class="nav-link" aria-current="page" href="#">Todo</a>
+        </router-link>
+        <router-link class="nav-item" to="/bmi" tag="li" active-class="active">
+          <a class="nav-link" aria-current="page" href="#">Bmi</a>
+        </router-link>
+      </ul>
+    </div>
+    <router-view />
   </div>
 </template>
 
 <script>
-import Header from "./components/Header.vue";
-import List from "./components/List.vue";
-import Add from "./components/Add.vue";
-import Popup from "./components/Popup.vue";
 export default {
-  data() {
-    return {
-      addData: {
-        name: "",
-        time: "",
-      },
-      list: [{ name: "Momen", time: "12:12" }],
-      isEditing: false,
-      editItemName: "",
-      popupShow: true,
-    };
-  },
-  components: {
-    Header,
-    List,
-    Add,
-    Popup,
-  },
-  methods: {
-    addDataFunction(data) {
-      if (data.name !== "") {
-        // is edit or add
-        if (this.isEditing) {
-          this.list.forEach((item) => {
-            if (item.name == this.editItemName) {
-              item.name = data.name;
-              item.time = data.time;
-            }
-          });
-        } else {
-          // Add New Task
-          let names = this.list.map((x) => x.name);
-          console.log("names: ", names);
-          if (names.indexOf(data.name) == -1) {
-            this.list.push({ name: data.name, time: data.time });
-          }
-        }
-        this.addData.name = "";
-        this.isEditing = false;
-      }
-    },
-    remove(i) {
-      this.list.splice(i, 1);
-    },
-    edit(data) {
-      this.isEditing = true;
-      this.editItemName = data.name;
-      this.editItemTime = data.time;
-      this.addData.name = data.name;
-      this.addData.time = data.time;
-    },
-  },
 };
 </script>
 
-<style lang="scss">
+<style>
 body {
-  background-color: #1c1b4d;
-  font-family: Arial, Helvetica, sans-serif;
+    background-color: #1c1b4d !important;
+    font-family: Arial, Helvetica, sans-serif;
 }
-
-:focus {
-  outline: none;
+.navigation {
+  margin-top: 50px;
 }
-
-.to-do {
-  width: 500px;
-  margin: 100px auto;
+.nav-pills .nav-item.active .nav-link {
+  color: #fff;
+  background-color: #0d6efd;
 }
 </style>
