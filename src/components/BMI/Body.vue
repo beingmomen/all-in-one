@@ -22,8 +22,7 @@ export default {
             // height: personData.height
         }
     },
-    props: ["showElement", "personData", "result", "conclusion", "unites"],
-    methods: {}
+    props: ["showElement", "personData", "result", "conclusion", "unites"], 
 }
 </script>
 

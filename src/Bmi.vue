@@ -1,13 +1,15 @@
 <template>
   <div>
     <section class="bmi">
-        <Form @claculate="claculate" :unites="unites" :type="type" :conclusion="conclusion" :result="result" :personData="personData" :showElement="showElement" />
+        <Form @claculate="claculate" @saveData="saveData" :username="username" :unites="unites" :type="type" :conclusion="conclusion" :result="result" :personData="personData" :showElement="showElement" />
     </section>
+    <DataStore @deleteCard="deleteCard" :dataStored="dataStored" :username="username" :type="type" :personData="personData" :result="result" :conclusion="conclusion" />
   </div>
 </template>
 
 <script>
 import Form from './components/BMI/Form.vue'
+import DataStore from './components/BMI/DataStore.vue'
 export default {
     data() {
         return {
@@ -25,10 +27,16 @@ export default {
                 weightUnit: "kg",
                 heightUnit: "cm"
             },
+            username: {
+                userInput: "",
+                userPut: ""
+            },
+            dataStored: [],
         }
     },
     components: {
-        Form
+        Form,
+        DataStore
     },
     methods: {
         claculate() {
@@ -36,7 +44,6 @@ export default {
 
             if (this.type.name == "metric") {
                 this.result = (this.personData.weight / (this.personData.height / 100) ** 2).toFixed(2)
-                console.log("yes");
             } else {
                 this.unites.weightUnit = "lb"
                 this.unites.heightUnit = "in"
@@ -52,7 +59,23 @@ export default {
             } else {
                 this.conclusion = ""
             }
-            console.log(this.type.name);
+        },
+        saveData() {
+            this.username.userPut = this.username.userInput
+            this.dataStored.push
+            ({
+                name: this.username.userInput,
+                system: this.type.name,
+                weight: this.personData.weight,
+                height: this.personData.height,
+                result: this.result,
+                conclusion: this.conclusion
+            })
+            this.showElement = false
+            this.personData = {weight: "", height: ""}
+        },
+        deleteCard(i) {
+            this.dataStored.splice(i, 1)
         }
     },
 }

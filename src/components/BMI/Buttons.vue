@@ -1,7 +1,7 @@
 <template>
     <div class="">
         <button @click.prevent="claculate" class="calculate" :class="{'full-width': fullWidth}">Calculate</button>
-        <button v-if="showElement" class=" save btn-hidden">Save</button>
+        <button @click.prevent="saveData" v-if="showElement" class=" save btn-hidden">Save</button>
     </div>
 </template>
 
@@ -9,14 +9,17 @@
 export default {
     data() {
         return {
-            fullWidth: true
+            fullWidth: true 
         }
     },
-    props: ["showElement"],
+    props: ["showElement", "username"],
     methods: {
         claculate() {
             this.$emit("claculate")
             this.fullWidth = false
+        },
+        saveData() {
+            this.$emit("saveData")
         }
     }
 }
