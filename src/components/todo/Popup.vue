@@ -5,7 +5,7 @@
       <hr />
       <h3 id="reminderName" class="reminder-name">{{popup.name}}</h3>
       <hr />
-      <buttonz id="done" class="button done-popup">Done</buttonz>
+      <button id="done" class="button done-popup">Done</button>
       <button @click="close" id="close" class="button close-popup">Close</button>
     </div>
   </div>
