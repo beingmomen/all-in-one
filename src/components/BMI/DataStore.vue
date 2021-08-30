@@ -1,6 +1,6 @@
 <template>
     <div id="stored" class="stored">
-        <div class='user-information' v-for="(item, i) in dataStored" :key="i">
+        <div class='user-information' v-for="(item, i) in bmiData.dataStored" :key="i">
             <font-awesome-icon @click="deleteCard(i)" class="add-task delete" :icon="['fas', 'trash-alt']" size="2x"/>
             <h3 class='user-name'>{{item.name}}</h3>
             <p class='unit-type'>
@@ -29,7 +29,7 @@
 
 <script>
 export default {
-    props: ["username", "type", "personData", "result", "conclusion", "dataStored"],
+    props: ["bmiData"],
     methods: {
         deleteCard(i) {
             let result = confirm("Sure To Delete ?")

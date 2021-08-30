@@ -1,19 +1,24 @@
 <template>
-  <div id="overlay" class="overlay" v-if="popupShow">
+  <div id="overlay" class="overlay" v-if="popup.show">
     <div id="popUp" class="pop-up">
-      <p id="reminderTime" class="reminder-time"></p>
+      <p id="reminderTime" class="reminder-time">{{popup.time}}</p>
       <hr />
-      <h3 id="reminderName" class="reminder-name"></h3>
+      <h3 id="reminderName" class="reminder-name">{{popup.name}}</h3>
       <hr />
-      <button id="done" class="button done-popup">Done</button>
-      <button id="close" class="button close-popup">Close</button>
+      <buttonz id="done" class="button done-popup">Done</buttonz>
+      <button @click="close" id="close" class="button close-popup">Close</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["popupShow"],
+  props: ["popup"],
+  methods: {
+    close() {
+      this.popup.show = false
+    }
+  }
 };
 </script>
 

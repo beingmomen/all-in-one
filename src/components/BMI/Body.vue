@@ -1,16 +1,16 @@
 <template>
     <div class="person-information">
         <label class="weight-name" for="weight">Weight</label>
-        <input v-model="personData.weight" class="weight-input" type="number" min="0" name="weight">
-        <label class="weight-unit" for="weight">{{unites.weightUnit}}</label>
+        <input v-model="bmiData.personData.weight" class="weight-input" type="number" min="0" name="weight">
+        <label class="weight-unit" for="weight">{{bmiData.unites.weightUnit}}</label>
         <br />
         <label class="height-name" for="weight">Height</label>
-        <input v-model="personData.height" class="height-input" type="number" min="0" name="height">
-        <label class="height-unit" for="height">{{unites.heightUnit}}</label>
+        <input v-model="bmiData.personData.height" class="height-input" type="number" min="0" name="height">
+        <label class="height-unit" for="height">{{bmiData.unites.heightUnit}}</label>
         <br />
-        <label v-if="showElement" class="result-name hidden hidden-element" for="result">Result</label>
-        <input v-if="showElement" v-model="result" class="result-input hidden hidden-element" type="text" name="result" disabled>
-        <input v-if="showElement" v-model="conclusion" id="conclusion" class="conclusion-input hidden hidden-element" type="text" name="conclusion" disabled>
+        <label v-if="bmiData.showElement" class="result-name hidden hidden-element" for="result">Result</label>
+        <input v-if="bmiData.showElement" v-model="bmiData.result" class="result-input hidden hidden-element" type="text" name="result" disabled>
+        <input v-if="bmiData.showElement" v-model="bmiData.conclusion" id="conclusion" class="conclusion-input hidden hidden-element" type="text" name="conclusion" disabled>
     </div>
 </template>
 
@@ -18,11 +18,9 @@
 export default {
     data() {
         return {
-            // weight: personData.weight,
-            // height: personData.height
         }
     },
-    props: ["showElement", "personData", "result", "conclusion", "unites"], 
+    props: ["bmiData"], 
 }
 </script>
 

@@ -1,9 +1,9 @@
 <template>
   <div>
     <section class="bmi">
-        <Form @claculate="claculate" @saveData="saveData" :username="username" :unites="unites" :type="type" :conclusion="conclusion" :result="result" :personData="personData" :showElement="showElement" />
+        <Form @claculate="claculate" @saveData="saveData" :bmiData="bmiData"/>
     </section>
-    <DataStore @deleteCard="deleteCard" :dataStored="dataStored" :username="username" :type="type" :personData="personData" :result="result" :conclusion="conclusion" />
+    <DataStore @deleteCard="deleteCard" :bmiData="bmiData" />
   </div>
 </template>
 
@@ -13,25 +13,27 @@ import DataStore from './components/BMI/DataStore.vue'
 export default {
     data() {
         return {
-            showElement: false,
-            personData: {
-                weight: "",
-                height: ""
+            bmiData: {
+                showElement: false,
+                result: "",
+                conclusion: "",
+                dataStored: [],
+                personData: {
+                    weight: "",
+                    height: ""
+                },
+                type: {
+                    name: "metric"
+                },
+                unites: {
+                    weightUnit: "kg",
+                    heightUnit: "cm"
+                },
+                username: {
+                    userInput: "",
+                    userPut: ""
+                },
             },
-            result: "",
-            conclusion: "",
-            type: {
-                name: "metric"
-            },
-            unites: {
-                weightUnit: "kg",
-                heightUnit: "cm"
-            },
-            username: {
-                userInput: "",
-                userPut: ""
-            },
-            dataStored: [],
         }
     },
     components: {
@@ -40,42 +42,43 @@ export default {
     },
     methods: {
         claculate() {
-            this.showElement = true
+            this.bmiData.showElement = true
 
-            if (this.type.name == "metric") {
-                this.result = (this.personData.weight / (this.personData.height / 100) ** 2).toFixed(2)
+            if (this.bmiData.type.name == "metric") {
+                this.bmiData.result = (this.bmiData.personData.weight / (this.bmiData.personData.height / 100) ** 2).toFixed(2)
             } else {
-                this.unites.weightUnit = "lb"
-                this.unites.heightUnit = "in"
-                this.result = (703 * this.personData.weight / (this.personData.height ** 2)).toFixed(2)
+                this.bmiData.unites.weightUnit = "lb"
+                this.bmiData.unites.heightUnit = "in"
+                this.bmiData.result = (703 * this.bmiData.personData.weight / (this.bmiData.personData.height ** 2)).toFixed(2)
             }
 
-            if(this.result >= 16 && this.result <= 18.5) {
-                this.conclusion = "Underweight"
-            } else if (this.result > 18.5 && this.result <= 25) {
-                this.conclusion = "Normal"
-            } else if (this.result > 25 && this.result <= 30) {
-                this.conclusion = "Overweight"
+            if(this.bmiData.result >= 16 && this.bmiData.result <= 18.5) {
+                this.bmiData.conclusion = "Underweight"
+            } else if (this.bmiData.result > 18.5 && this.bmiData.result <= 25) {
+                this.bmiData.conclusion = "Normal"
+            } else if (this.bmiData.result > 25 && this.bmiData.result <= 30) {
+                this.bmiData.conclusion = "Overweight"
             } else {
-                this.conclusion = ""
+                this.bmiData.conclusion = ""
             }
         },
         saveData() {
-            this.username.userPut = this.username.userInput
-            this.dataStored.push
+            this.bmiData.username.userPut = this.bmiData.username.userInput
+            this.bmiData.dataStored.push
             ({
-                name: this.username.userInput,
-                system: this.type.name,
-                weight: this.personData.weight,
-                height: this.personData.height,
-                result: this.result,
-                conclusion: this.conclusion
+                name: this.bmiData.username.userInput,
+                system: this.bmiData.type.name,
+                weight: this.bmiData.personData.weight,
+                height: this.bmiData.personData.height,
+                result: this.bmiData.result,
+                conclusion: this.bmiData.conclusion
             })
-            this.showElement = false
-            this.personData = {weight: "", height: ""}
+            this.bmiData.showElement = false
+            this.bmiData.personData = {weight: "", height: ""}
+            this.bmiData.username = {userInput: ""}
         },
         deleteCard(i) {
-            this.dataStored.splice(i, 1)
+            this.bmiData.dataStored.splice(i, 1)
         }
     },
 }

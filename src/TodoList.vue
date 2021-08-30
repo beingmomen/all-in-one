@@ -3,7 +3,7 @@
     <Header :counter="list.length" />
     <List @editItem="edit" @removeItem="remove" :list="list" />
     <Add :addData="addData" @addDataToList="addDataFunction" />
-    <Popup :showPopup="popupShow" />
+    <Popup :popup="popup" />
   </div>
 </template>
 
@@ -22,7 +22,12 @@ export default {
       list: [{ name: "Momen", time: "12:12" }],
       isEditing: false,
       editItemName: "",
-      popupShow: true,
+      popup: {
+        show: false,
+        name: "",
+        time: ""
+      },
+      currentTime: ""
     };
   },
   components: {
@@ -64,6 +69,23 @@ export default {
       this.addData.name = data.name;
       this.addData.time = data.time;
     },
+  },
+  mounted() {
+    setInterval(() => {
+      const date = new Date();
+      this.currentTime = new Intl.DateTimeFormat("en-GB", {
+        timeStyle: "short",
+      }).format(date)
+      this.list.forEach(item => {
+      if (item.time == this.currentTime) {
+        this.popup.show = true
+        this.popup.name = item.name
+        this.popup.time = item.time
+      } else {
+        
+      }
+    })
+    }, 5000);
   },
 };
 </script>

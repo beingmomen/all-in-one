@@ -1,9 +1,9 @@
 <template>
     <form class="Imperial-units" action="">
-        <input v-if="showElement" v-model="username.userInput" class="agent-name" type="text" name="name" placeholder="Type Your Name">
-        <Head :unites="unites" :type="type" />
-        <Body :result="result" :unites="unites" :conclusion="conclusion" :personData="personData" :showElement="showElement" />
-        <Buttons @claculate="claculate" @saveData="saveData" :showElement="showElement" />
+        <input v-if="bmiData.showElement" v-model="bmiData.username.userInput" class="agent-name" type="text" name="name" placeholder="Type Your Name">
+        <Head :bmiData="bmiData" />
+        <Body :bmiData="bmiData" />
+        <Buttons @claculate="claculate" @saveData="saveData" :bmiData="bmiData" />
     </form>
 </template>
 
@@ -12,7 +12,7 @@ import Head from './Head.vue'
 import Body from './Body.vue' 
 import Buttons from './Buttons.vue'
 export default {
-    props: ["showElement", "personData", "result", "conclusion", "type", "unites", "username"],
+    props: ["bmiData"],
     components: {
         Head,
         Body,

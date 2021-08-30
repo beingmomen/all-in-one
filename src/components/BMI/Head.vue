@@ -2,9 +2,9 @@
     <div>
         <div id="heading" class="heading">
             <h2 class="heading-title">System</h2>
-            <input @change="chooseMetric" v-model="type.name" id="metric" class="metric-input" type="radio" name="units" value="metric" />
+            <input @change="chooseMetric" v-model="bmiData.type.name" id="metric" class="metric-input" type="radio" name="units" value="metric" />
             <label for="metric" class="metric-name">Metric</label>
-            <input @change="chooseImperial" v-model="type.name" id="imperial" class="imperial-input" type="radio" name="units" value="imperial" />
+            <input @change="chooseImperial" v-model="bmiData.type.name" id="imperial" class="imperial-input" type="radio" name="units" value="imperial" />
             <label for="imperial" class="imperial-name">Imperial</label>
         </div>
         <hr>
@@ -12,18 +12,22 @@
 </template> 
 <script>
 export default {
-    props: ["type", "unites"],
+    props: ["bmiData"],
     methods: {
         chooseMetric() {
-            if (this.type.name = "metric") {
-                this.unites.heightUnit = "cm"
-                this.unites.weightUnit = "kg"
+            if (this.bmiData.type.name = "metric") {
+                this.bmiData.unites.heightUnit = "cm"
+                this.bmiData.unites.weightUnit = "kg"
+                this.bmiData.personData.weight = ""
+                this.bmiData.personData.height = ""
             }
         },
         chooseImperial() {
-            if (this.type.name = "imperial") {
-                this.unites.heightUnit = "in"
-                this.unites.weightUnit = "lb"
+            if (this.bmiData.type.name = "imperial") {
+                this.bmiData.unites.heightUnit = "in"
+                this.bmiData.unites.weightUnit = "lb"
+                this.bmiData.personData.weight = ""
+                this.bmiData.personData.height = ""
             }
         }
     }
