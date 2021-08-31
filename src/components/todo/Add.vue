@@ -39,10 +39,11 @@ export default {
   },
   computed: {},
   created() {
-    const date = new Date();
-    this.addData.time = new Intl.DateTimeFormat("en-GB", {
-      timeStyle: "short",
-    }).format(date);
+    setInterval(() => {
+      this.addData.time = new Intl.DateTimeFormat("en-GB", {
+        timeStyle: "short",
+      }).format(new Date());
+    }, 1000);
   },
 };
 </script>
