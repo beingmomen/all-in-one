@@ -73,9 +73,7 @@ export default {
   mounted() {
     setInterval(() => {
       const date = new Date();
-      this.currentTime = new Intl.DateTimeFormat("en-GB", {
-        timeStyle: "short",
-      }).format(date)
+      this.currentTime = new Intl.DateTimeFormat("en-GB", {timeStyle: "short",}).format(date)
       this.list.forEach(item => {
       if (item.time == this.currentTime) {
         this.popup.show = true
